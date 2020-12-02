@@ -1,0 +1,16 @@
+{
+  "timeZone": "Europe/London",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "Assert",
+      "libraryId": "1R-rxUHuQU0ez95FlZz9fxqifbYFszHnukqzv_3Uk5zM3eG4eRBrh_E1M",
+      "version": "9"
+    }, {
+      "userSymbol": "Log",
+      "libraryId": "1ZDOUyPJ93AeeFavZRoCMDJ2V5hmnXoOgtwiff_0qIUU8gndta40HEC6L",
+      "version": "17"
+    }]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "DEPRECATED_ES5"
+}
