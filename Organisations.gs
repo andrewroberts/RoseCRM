@@ -248,7 +248,7 @@ function onFormSubmit_(event) {
   }
 
   createNotesSheet()
-  GmailApp.createLabel('R/AJRComp/' + companyName)
+  GmailApp.createLabel('R/AJR Comp/' + companyName)
   return
 
   // Private Functions
