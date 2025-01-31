@@ -87,9 +87,9 @@ function onOpen() {
     .addSeparator()  
 
   if (Triggers_.isTriggerCreated()) {
-    menu.addItem('Disable "on form submit" trigger', "onSetup")
+    menu.addItem('Disable automatic file & folder creation', "onSetup")
   } else {
-    menu.addItem('Enable "on form submit" trigger', "onSetup")
+    menu.addItem('RUN SETUP!', "onSetup")
   }
 
   menu.addToUi()
@@ -233,13 +233,15 @@ function onFormSubmit_(event) {
 
   createNotesSheet()
   createGMailLabel()
+  Log_.info(`Form submission processed OK!`)
   return
 
   // Private Functions
   // -----------------
 
   function createGMailLabel() {
-    GmailApp.createLabel(config.YOUR_COMPANY_GMAIL_PARENT_LABEL + companyName)
+    const parent = config.YOUR_COMPANY_GMAIL_PARENT_LABEL || ''
+    GmailApp.createLabel(parent + companyName)
     Log_.info('Created GMail label: ' + journalFileUrl)  
   }
 
@@ -285,7 +287,12 @@ function onFormSubmit_(event) {
    
   function createNotesSheet() {
     spreadsheet.getSheetByName(config.NOTES_TEMPLATE_SHEET_NAME).activate()
-    spreadsheet.duplicateActiveSheet().setName(companyName)
+    try {
+      spreadsheet.duplicateActiveSheet().setName(companyName)
+    } catch (error) {
+      Log_.warning(`There is already tab called ${companyName}`)
+      return       
+    }
     spreadsheet.moveActiveSheet(2) // After the clients sheet
     responseSheet.activate()
     Log_.info('Created new notes sheet for "%s"', companyName)
@@ -374,45 +381,46 @@ function onCreateContract_() {
       Log_.fine('Found company address')      
     }
 
-    copyBody.replaceText('%' + header + '%', value)    
+    const nextPlaceholder = '(?i){{' + header.replace(/[^a-z0-9\s]/gi, ".") + '}}'
+    copyBody.replaceText(nextPlaceholder, value)
     
   } // For each column
   
   // Specials
   
-  copyBody.replaceText('%Your Company Name%', config.YOUR_COMPANY_NAME)    
-  copyBody.replaceText('%Your Company Address%', config.YOUR_COMPANY_ADDRESS)    
-  copyBody.replaceText('%Your Company Service%', config.YOUR_COMPANY_SERVICE)    
-  copyBody.replaceText('%Your Name%', config.YOUR_NAME)    
+  copyBody.replaceText('{{YOUR_COMPANY_NAME}}', config.YOUR_COMPANY_NAME)    
+  copyBody.replaceText('{{YOUR_COMPANY_ADDRESS}}', config.YOUR_COMPANY_ADDRESS)    
+  copyBody.replaceText('{{YOUR_COMPANY_SERVICE}}', config.YOUR_COMPANY_SERVICE)    
+  copyBody.replaceText('{{YOUR_NAME}}', config.YOUR_NAME)    
 
   const timeZone = Session.getScriptTimeZone()
   const date = new Date()
   const dateString = Utilities.formatDate(date, timeZone, config.DATE_FORMAT)
   Log_.fine('dateString: ' + dateString)
-  copyBody.replaceText('%Contract Date%', dateString)
+  copyBody.replaceText('{{Contract Date}}', dateString)
     
   // Check we found all the info we need
   
-  if (companyName === null || companyName === '') {
+  // if (companyName === null || companyName === '') {
   
-    ui.alert('Could not find the company name')
-    return
+  //   ui.alert('Could not find the company name')
+  //   return
     
-  } else if (companyFolderUrl === null || companyFolderUrl === '') {
+  // } else if (companyFolderUrl === null || companyFolderUrl === '') {
   
-    ui.alert('Could not find the company folder URL')
-    return
+  //   ui.alert('Could not find the company folder URL')
+  //   return
     
-  } else if (rate === null || rate === '') {
+  // } else if (rate === null || rate === '') {
   
-    ui.alert('Could not find the rate')
-    return
+  //   ui.alert('Could not find the rate')
+  //   return
     
-  } else if (address === null || address === '') {
+  // } else if (address === null || address === '') {
   
-    ui.alert('Could not find the company address')
-    return
-  }
+  //   ui.alert('Could not find the company address')
+  //   return
+  // }
     
   // Create the PDF file, rename it if required and delete the doc copy
     
@@ -531,22 +539,23 @@ function onCreateNda_() {
       Log_.fine('Found company address')      
     }
 
-    copyBody.replaceText('%' + header + '%', value)    
+    const nextPlaceholder = '(?i){{' + header.replace(/[^a-z0-9\s]/gi, ".") + '}}'
+    copyBody.replaceText(nextPlaceholder, value)
     
   } // For each column
 
   // Specials
 
-  copyBody.replaceText('%Your Company Name%', config.YOUR_COMPANY_NAME)    
-  copyBody.replaceText('%Your Company Address%', config.YOUR_COMPANY_ADDRESS)    
-  copyBody.replaceText('%Your Company Service%', config.YOUR_COMPANY_SERVICE)    
-  copyBody.replaceText('%Your Name%', config.YOUR_NAME)    
+  copyBody.replaceText('{{YOUR_COMPANY_NAME}}', config.YOUR_COMPANY_NAME)    
+  copyBody.replaceText('{{YOUR_COMPANY_ADDRESS}}', config.YOUR_COMPANY_ADDRESS)    
+  copyBody.replaceText('{{YOUR_COMPANY_SERVICE}}', config.YOUR_COMPANY_SERVICE)    
+  copyBody.replaceText('{{YOUR_NAME}}', config.YOUR_NAME)    
   
   const timeZone = Session.getScriptTimeZone()
   const date = new Date()
   const dateString = Utilities.formatDate(date, timeZone, config.DATE_FORMAT)
   Log_.fine('dateString: ' + dateString)
-  copyBody.replaceText('%Contract Date%', dateString)
+  copyBody.replaceText('{{Contract Date}}', dateString)
     
   // Check we found all the info we need
   

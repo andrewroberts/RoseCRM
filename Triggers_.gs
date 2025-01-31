@@ -27,7 +27,7 @@ var Triggers_ = (function(ns) {
     trigger = ScriptApp.newTrigger(TRIGGER_SCRIPT_NAME_).forSpreadsheet(SpreadsheetApp.getActive()).onFormSubmit().create()
     const triggerId = trigger.getUniqueId()        
     Properties_.setProperty('AUTOMATIC_TRIGGER_ID', triggerId)
-    Utils_.alert('New trigger created.', 'Manage Trigger')
+    Utils_.alert('Setup complete, and new "on form submit" trigger created.', 'Manage Trigger')
     Log_.info('Created  new "on form submit" trigger ' + triggerId)
     onOpen() 
   }
