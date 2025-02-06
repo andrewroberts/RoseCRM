@@ -19,3 +19,5 @@ RoseCRM, a simple but functional CRM that through the magic of Apps Script, offe
 Click on [this link to take a copy of the GSheet template](https://docs.google.com/spreadsheets/d/17aQbXo85GVf9_wPTt3JblWcQSvZxlaTgYOMoSQkDm_E/copy), and get those clients organised. Or take a look at [the RoseCRM User Manual](https://docs.google.com/document/d/1yJFCr2uftxOpmSeGNH_SzdE5skabXJvr-OD88Kadgbw/edit?tab=t.0).
 
 [Record any issues here](https://docs.google.com/spreadsheets/d/1NnAtVUulyJbDuKZ_JR2XrkJHDcMZda7nb8si79iQ3JQ/edit?gid=788059123#gid=788059123).
+
+[Full blog post](https://www.andrewroberts.net/2025/01/rosecrm-a-free-google-sheet-crm/)
