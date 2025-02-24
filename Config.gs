@@ -34,7 +34,7 @@
 // =============
 
 const SCRIPT_NAME = "RoseCRM"
-const SCRIPT_VERSION = "v1.0"
+const SCRIPT_VERSION = "v1.0.1"
 
 const PRODUCTION_VERSION = true
 
