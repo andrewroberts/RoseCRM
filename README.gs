@@ -3,8 +3,12 @@
 // README
 // ======
 
-// v0.dev_ajr
-// ----------
+// v1.0.1
+// ------
+//
+// * Updated NDA and Contract name
+
+// v1.0
+// -----
 //
 // * First version
-// * Added contract creations

@@ -310,7 +310,7 @@ function onCreateContract_() {
   
   const ui = SpreadsheetApp.getUi()
   const config = Utils_.getConfig()
-  const copyFile = DriveApp.getFileById(config.CONTRACT_TEMPLATE_SHEET_ID).makeCopy()
+  const copyFile = DriveApp.getFileById(config.CONTRACT_TEMPLATE_GDOC_ID).makeCopy()
   const copyId = copyFile.getId()
   const copyDoc = DocumentApp.openById(copyId)  
   const copyBody = copyDoc.getBody()
@@ -468,7 +468,7 @@ function onCreateNda_() {
   
   const ui = SpreadsheetApp.getUi()
   const config = Utils_.getConfig()
-  const copyFile = DriveApp.getFileById(config.NDA_TEMPLATE_SHEET_ID).makeCopy()
+  const copyFile = DriveApp.getFileById(config.NDA_TEMPLATE_GDOC_ID).makeCopy()
   const copyId = copyFile.getId()
   const copyDoc = DocumentApp.openById(copyId)  
   const copyBody = copyDoc.getBody()
